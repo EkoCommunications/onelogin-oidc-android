@@ -95,5 +95,6 @@ internal class SignInManagerImpl(
             Uri.parse(configuration.redirectUrl)
         )
         .setScope(configuration.scopes.joinToString(" "))
+        .setPrompt(configuration.prompt)
         .build()
 }
