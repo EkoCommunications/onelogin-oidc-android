@@ -1,6 +1,7 @@
 package com.onelogin.oidc
 
 import com.onelogin.oidc.data.stores.EncryptionManager
+import net.openid.appauth.AuthorizationRequest
 
 class OIDCConfiguration private constructor(
     internal val issuer: String,
@@ -8,7 +9,8 @@ class OIDCConfiguration private constructor(
     internal val redirectUrl: String,
     internal val scopes: List<String>,
     internal val encryptionManager: EncryptionManager?,
-    internal val debug: Boolean
+    internal val debug: Boolean,
+    internal val prompt: String
 ) {
 
     class Builder {
@@ -18,6 +20,7 @@ class OIDCConfiguration private constructor(
         private var scopes: List<String> = emptyList()
         private var encryptionManager: EncryptionManager? = null
         private var debug: Boolean = false
+        private var prompt: String = AuthorizationRequest.Prompt.NONE
 
         fun issuer(issuer: String): Builder {
             this.issuer = issuer
@@ -41,6 +44,11 @@ class OIDCConfiguration private constructor(
 
         fun isDebug(debug: Boolean): Builder {
             this.debug = debug
+            return this
+        }
+
+        fun prompt(prompt: String): Builder {
+            this.prompt = prompt
             return this
         }
 
@@ -72,7 +80,8 @@ class OIDCConfiguration private constructor(
                 redirectUrl!!,
                 scopes,
                 encryptionManager,
-                debug
+                debug,
+                prompt
             )
         }
     }
