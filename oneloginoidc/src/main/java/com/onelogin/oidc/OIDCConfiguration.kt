@@ -20,7 +20,7 @@ class OIDCConfiguration private constructor(
         private var scopes: List<String> = emptyList()
         private var encryptionManager: EncryptionManager? = null
         private var debug: Boolean = false
-        private var prompt: String = AuthorizationRequest.Prompt.NONE
+        private var prompt: String = AuthorizationRequest.Prompt.LOGIN
 
         fun issuer(issuer: String): Builder {
             this.issuer = issuer
